@@ -14,7 +14,19 @@ export const pokeStore = new Vuex.Store({
         setIndex: (state) => (data) => {
             let setData = state.sets.findIndex(set => set.id === data)
             return state.sets[setData];
-        }
+        },
+        setsByDate: (state) => {
+            const setsCopy = [...state.sets];
+
+            setsCopy.sort((setA, setB) => {
+                const dateA = new Date(setA.releaseDate.replace(/\//g, '-'));
+                const dateB = new Date(setB.releaseDate.replace(/\//g, '-'));
+
+                return dateB - dateA;
+            });
+
+            return setsCopy;
+        },
     },
     mutations: {
         setSets: (state, data) => {

@@ -32,7 +32,7 @@
         <span>Select a set</span>
       </div>
       <router-link
-        v-for="set in sets"
+        v-for="set in setsByDate"
         :key="set.id"
         :to="{ name: 'Set', params: { id: set.id } }"
         :class="{ active: set.id === $route.params.id }"
@@ -74,6 +74,9 @@ export default {
     setsReady() {
       return this.$store.state.setsReady;
     },
+    setsByDate() {
+      return this.$store.getters.setsByDate;
+    }
   },
   created() {
     this.ww = window.innerWidth;
