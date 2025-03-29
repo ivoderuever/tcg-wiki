@@ -13,9 +13,8 @@
 </template>
 
 <script>
-import Sidebar from "./components/Sidebar";
-
-import Loader from "./components/Loader";
+import Sidebar from "./components/Sidebar.vue";
+import Loader from "./components/Loader.vue";
 
 export default {
   components: {
@@ -37,8 +36,8 @@ export default {
 </script>
 
 <style lang="scss">
+@use "./style/responsive" as responsive;
 @import url("https://use.typekit.net/eqp3quc.css");
-@import "./style/responsive.scss";
 
 :root {
   --app-height: 100%;
@@ -121,7 +120,7 @@ body {
 
 //responsive
 .app-body {
-  @include respond-to("tablet") {
+  @include responsive.respond-to("tablet") {
     display: flex;
     flex-direction: row;
   }

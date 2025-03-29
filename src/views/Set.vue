@@ -147,7 +147,7 @@ export default {
 </script>
 
 <style lang="scss">
-@import "../style/responsive.scss";
+@use "../style/responsive" as responsive;
 
 .loader {
   height: 100vh;
@@ -240,7 +240,7 @@ export default {
 
 //responsive
 .header {
-  @include respond-to("tablet") {
+  @include responsive.respond-to("tablet") {
     h1 {
       font-size: 48px;
     }
@@ -250,13 +250,13 @@ export default {
     }
   }
 
-  @include respond-to("phablet") {
+  @include responsive.respond-to("phablet") {
     display: flex;
     justify-content: space-between;
   }
 }
 
-@include respond-to("mobile-lg") {
+@include responsive.respond-to("mobile-lg") {
   .cards-container {
     justify-content: space-between;
 
@@ -269,7 +269,7 @@ export default {
 }
 
 .cards-container {
-  @include respond-to("tablet") {
+  @include responsive.respond-to("tablet") {
     padding-bottom: 20px;
 
     .card {

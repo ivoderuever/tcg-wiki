@@ -20,7 +20,7 @@
 </template>
 
 <script>
-import Modal from "./Modal";
+import Modal from "./Modal.vue";
 
 export default {
   name: "Card",
@@ -32,7 +32,7 @@ export default {
 </script>
 
 <style lang="scss">
-@import "../style/responsive.scss";
+@use "../style/responsive" as responsive;
 
 .card-container {
   height: inherit;
@@ -58,7 +58,7 @@ export default {
   }
 }
 
-@include respond-to("tablet") {
+@include responsive.respond-to("tablet") {
   .flex-container-row {
     display: flex;
     flex-direction: row;

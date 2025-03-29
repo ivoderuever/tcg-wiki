@@ -12,4 +12,4 @@ new Vue({
   router,
   store: pokeStore,
   render: h => h(App),
-}).$mount('#app')
+}).$mount('#app');

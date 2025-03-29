@@ -54,7 +54,7 @@
 </template>
 
 <script>
-import Loader from "./Loader";
+import Loader from "./Loader.vue";
 
 export default {
   name: "Sidebar",
@@ -103,7 +103,7 @@ export default {
 </script>
 
 <style lang="scss">
-@import "../style/responsive.scss";
+@use "../style/responsive" as responsive;
 
 .nav {
   z-index: 1;
@@ -263,7 +263,7 @@ export default {
 
 //responsive
 .nav {
-  @include respond-to("tablet") {
+  @include responsive.respond-to("tablet") {
     transition: all 0.2s ease;
     position: relative;
     width: 290px;
@@ -328,7 +328,7 @@ export default {
 }
 
 .closed {
-  @include respond-to("tablet") {
+  @include responsive.respond-to("tablet") {
     transition: all 0.2s ease;
     width: 60px;
     min-width: 60px;

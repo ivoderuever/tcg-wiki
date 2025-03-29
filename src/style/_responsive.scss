@@ -1,29 +1,59 @@
+// Import necessary Sass modules (modern standard)
+@use "sass:map";
+@use "sass:list";
+@use "sass:meta";
+
 $breakpoints: (
-        'desktop-large': (min-width: 1440px),
-        'desktop-hd': (min-width: 1200px),
-        'desktop': (min-width: 1000px),
-        'tablet': (min-width: 750px),
-        'phablet': (min-width: 520px),
-        'mobile-lg': (min-width: 350px),
-        'mobile-md': (min-width: 300px),
-        'mobile': (min-width: 320px),
+    'desktop-large': (min-width: 1440px),
+    'desktop-hd': (min-width: 1200px),
+    'desktop': (min-width: 1000px),
+    'tablet': (min-width: 750px),
+    'phablet': (min-width: 520px),
+    'mobile-lg': (min-width: 350px),
+    'mobile-md': (min-width: 300px),
+    'mobile': (min-width: 320px),
 );
 
 @mixin respond-to($breakpoint) {
-    $raw-query: map-get($breakpoints, $breakpoint);
+    $breakpoint-map: map.get($breakpoints, $breakpoint);
 
-    @if $raw-query {
-        $query: if(type-of($raw-query)=='string',
-                unquote($raw-query),
-                inspect($raw-query));
+    @if $breakpoint-map {
+        @if meta.type-of($breakpoint-map) == map {
+            $query-parts: (); // Initialize an empty list
 
-        @media #{$query} {
-            @content;
+            // Build the list of individual condition strings like "(feature: value)"
+            @each $feature, $value in $breakpoint-map {
+                // Let Sass handle interpolation of values (numbers, px, etc.)
+                $part: "(" + $feature + ": " + $value + ")";
+                $query-parts: list.append($query-parts, $part);
+            }
+
+            $query: ""; // Initialize the final query string
+            $num-parts: list.length($query-parts); // Get the number of conditions
+
+            @if $num-parts == 1 {
+                // If there's exactly ONE condition, use it directly
+                $query: list.nth($query-parts, 1);
+            } @else if $num-parts > 1 {
+                // If there are MULTIPLE conditions, join them with " and "
+                $query: list.join($query-parts, " and ");
+            } @else {
+                // Handle the (unlikely) case where the map was empty
+                @error "Breakpoint map for '#{$breakpoint}' resulted in zero query parts.";
+            }
+
+            // Only output the @media rule if a valid query was constructed
+            @if $query != "" {
+                @media #{$query} {
+                    @content; // Apply the styles passed to the mixin
+                }
+            }
+
+        } @else {
+            @error 'Breakpoint definition for "#{$breakpoint}" is not a map. Found: #{$breakpoint-map}';
         }
-    }
-
-    @else {
-        @error 'No value found for `#{$breakpoint}`. '
-        +'Please make sure it is defined in `$breakpoints` map.';
+    } @else {
+        @error 'No value found for breakpoint "#{$breakpoint}". ' +
+               'Please make sure it is defined in the $breakpoints map.';
     }
 }
