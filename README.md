@@ -1,25 +1,26 @@
-# tcg-wiki
+# TCG Wiki
 
-## Project setup
-```
-npm install
-```
-Then copy ```.env.example``` to ```.env``` and change the enviorment variables with your api key.
-
-### Compiles and hot-reloads for development
-```
-npm run serve
+## Project Setup
+```bash
+yarn install
 ```
 
-### Compiles and minifies for production
-```
-npm run build
+Then copy `.env.example` to `.env` and update the environment variables with your API key.
+
+### Start the Development Server
+```bash
+yarn dev
 ```
 
-### Lints and fixes files
-```
-npm run lint
+### Build for Production
+```bash
+yarn build
 ```
 
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
+### Preview the Production Build
+```bash
+yarn serve
+```
+
+### Customize Configuration
+See [Vite Configuration Reference](https://vitejs.dev/config/).
