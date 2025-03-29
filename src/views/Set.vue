@@ -29,7 +29,7 @@
           <input
             class="input"
             type="text"
-            placeholder="Search"
+            placeholder="Search a card"
             v-model="filterWord"
           />
           <svg
