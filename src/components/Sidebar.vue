@@ -425,11 +425,15 @@ export default {
 }
 
 .search-container {
-    min-width: 200px;
+    max-width: 250px;
     display: flex;
     flex-direction: column;
     justify-content: center;
-    margin: 0px 10px 20px 10px; 
+    margin: 20px auto;
+
+    @include responsive.respond-to("tablet") {
+      margin: 0px 10px 20px 10px;
+    }
   }
 
   .search {
