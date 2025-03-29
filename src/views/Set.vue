@@ -204,11 +204,12 @@ export default {
       background: none;
       border: none;
       color: var(--font);
-      width: 150px;
+      // width: 150px;
+      width: calc(100% - 50px);
+      padding-left: 2px;
 
       &::placeholder {
         color: #bbbbbb;
-        padding-left: 3px;
         font-weight: 400;
       }
 
